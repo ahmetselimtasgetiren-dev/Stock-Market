@@ -1,0 +1,21 @@
+{
+  "name": "StockMarket.Content.Tests.EditMode",
+  "rootNamespace": "StockMarket.Content.Tests",
+  "references": [
+    "StockMarket.Content"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false,
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}
