@@ -7,7 +7,8 @@ namespace StockMarket.Domain.Market.Simulation
         public CompanySimulationProfile(
             string companyId,
             double volatility,
-            double driftPerTick = 0d)
+            double driftPerTick = 0d,
+            string sectorId = "")
         {
             if (string.IsNullOrWhiteSpace(companyId))
             {
@@ -31,6 +32,7 @@ namespace StockMarket.Domain.Market.Simulation
             CompanyId = companyId;
             Volatility = volatility;
             DriftPerTick = driftPerTick;
+            SectorId = sectorId ?? throw new ArgumentNullException(nameof(sectorId));
         }
 
         public string CompanyId { get; }
@@ -38,6 +40,8 @@ namespace StockMarket.Domain.Market.Simulation
         public double Volatility { get; }
 
         public double DriftPerTick { get; }
+
+        public string SectorId { get; }
 
         private static bool IsFinite(double value)
         {

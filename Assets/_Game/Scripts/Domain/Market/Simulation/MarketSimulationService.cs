@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using StockMarket.Domain.News;
 
 namespace StockMarket.Domain.Market.Simulation
 {
@@ -13,16 +14,28 @@ namespace StockMarket.Domain.Market.Simulation
         private readonly SeededRandomSource random;
         private readonly CompanySimulationProfile[] orderedProfiles;
         private readonly long[] nextPrices;
+        private readonly NewsEventService newsEvents;
 
         public MarketSimulationService(
             MarketState marketState,
             IEnumerable<CompanySimulationProfile> profiles,
             MarketSimulationConfig config,
             ulong randomSeed)
+            : this(marketState, profiles, config, randomSeed, null)
+        {
+        }
+
+        public MarketSimulationService(
+            MarketState marketState,
+            IEnumerable<CompanySimulationProfile> profiles,
+            MarketSimulationConfig config,
+            ulong randomSeed,
+            NewsEventService newsEvents)
         {
             this.marketState = marketState ?? throw new ArgumentNullException(nameof(marketState));
             this.config = config ?? throw new ArgumentNullException(nameof(config));
             random = new SeededRandomSource(randomSeed);
+            this.newsEvents = newsEvents;
 
             if (profiles == null)
             {
@@ -104,11 +117,19 @@ namespace StockMarket.Domain.Market.Simulation
                 }
             }
 
+            if (newsEvents != null && tick <= newsEvents.CurrentTick)
+            {
+                throw new InvalidOperationException(
+                    "News state has already processed this simulation tick or a later one.");
+            }
+
             CurrentMarketTrend = Clamp(
                 (CurrentMarketTrend * config.TrendPersistence) +
                 (random.NextSignedUnitDouble() * config.TrendShockMagnitude),
                 -config.MaximumTrendMagnitude,
                 config.MaximumTrendMagnitude);
+
+            newsEvents?.AdvanceToTick(tick);
 
             for (int index = 0; index < marketState.Companies.Count; index++)
             {
@@ -119,6 +140,7 @@ namespace StockMarket.Domain.Market.Simulation
                     config.GlobalDriftPerTick +
                     profile.DriftPerTick +
                     CurrentMarketTrend +
+                    (newsEvents?.GetPriceImpact(company.CompanyId, profile.SectorId) ?? 0d) +
                     randomMovement,
                     -config.MaximumPriceChangeRatio,
                     config.MaximumPriceChangeRatio);
