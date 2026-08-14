@@ -1,0 +1,13 @@
+{
+  "name": "StockMarket.Presentation.Tests.EditMode",
+  "rootNamespace": "StockMarket.Presentation.Tests",
+  "references": [
+    "StockMarket.Presentation",
+    "StockMarket.Content",
+    "StockMarket.Core",
+    "StockMarket.Domain"
+  ],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

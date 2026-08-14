@@ -1,0 +1,10 @@
+{
+  "name": "StockMarket.Presentation",
+  "rootNamespace": "StockMarket.Presentation",
+  "references": [
+    "StockMarket.Core",
+    "StockMarket.Content",
+    "StockMarket.Domain"
+  ],
+  "autoReferenced": true
+}

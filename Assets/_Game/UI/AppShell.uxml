@@ -1,0 +1,204 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="project://database/Assets/_Game/UI/AppShell.uss" />
+    <ui:VisualElement name="app-root" class="app-root">
+        <ui:VisualElement class="sidebar">
+            <ui:VisualElement class="brand-block">
+                <ui:Label text="PAPER STREET" class="brand-title" />
+                <ui:Label text="Fictional Market Desk" class="brand-subtitle" />
+            </ui:VisualElement>
+            <ui:Label text="WORKSPACE" class="eyebrow sidebar-eyebrow" />
+            <ui:Button name="nav-market" text="▦   Market" class="nav-button nav-button--active" />
+            <ui:Button name="nav-portfolio" text="◫   Portfolio" class="nav-button" />
+            <ui:Button name="nav-upgrades" text="◇   Upgrades" class="nav-button" />
+            <ui:Button text="◌   News             LATER" class="nav-button nav-button--locked" enabled="false" />
+            <ui:Button text="▤   Reports         LATER" class="nav-button nav-button--locked" enabled="false" />
+            <ui:VisualElement class="sidebar-spacer" />
+            <ui:VisualElement class="beginner-card">
+                <ui:Label text="FIRST SESSION" class="eyebrow" />
+                <ui:Label text="Buy a few shares, watch prices move, then check your portfolio." class="beginner-copy" />
+            </ui:VisualElement>
+            <ui:Label text="Offline • Fictional data only" class="offline-note" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="workspace">
+            <ui:VisualElement class="topbar">
+                <ui:VisualElement>
+                    <ui:Label text="Cash available" class="top-label" />
+                    <ui:Label name="top-cash" text="FC 0.00" class="top-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="top-stat">
+                    <ui:Label text="Net worth" class="top-label" />
+                    <ui:Label name="top-net-worth" text="FC 0.00" class="top-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="top-spacer" />
+                <ui:VisualElement class="market-live-pill">
+                    <ui:VisualElement class="live-dot" />
+                    <ui:Label text="MARKET LIVE" />
+                </ui:VisualElement>
+                <ui:Label name="top-tick" text="Market tick 0" class="tick-label" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="market-page" class="page">
+                <ui:VisualElement class="page-heading">
+                    <ui:VisualElement>
+                        <ui:Label text="Market" class="page-title" />
+                        <ui:Label text="Choose a fictional company, follow its movement, and place a simple trade." class="page-subtitle" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="range-switch">
+                        <ui:Button text="1M" class="range-button" enabled="false" />
+                        <ui:Button text="Live" class="range-button range-button--active" />
+                        <ui:Button text="All" class="range-button" enabled="false" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="market-layout">
+                    <ui:VisualElement class="card company-list-card">
+                        <ui:Label text="COMPANIES" class="eyebrow card-heading" />
+                        <ui:Label text="All companies are unlocked in this first playable." class="small-muted" />
+                        <ui:VisualElement name="market-company-list" class="company-list" />
+                    </ui:VisualElement>
+
+                    <ui:VisualElement class="market-main-column">
+                        <ui:VisualElement class="card chart-card">
+                            <ui:VisualElement class="company-heading-row">
+                                <ui:VisualElement>
+                                    <ui:Label name="selected-company-name" text="Company" class="company-title" />
+                                    <ui:Label name="selected-company-meta" text="TICKER • Sector" class="company-meta" />
+                                </ui:VisualElement>
+                                <ui:VisualElement class="price-block">
+                                    <ui:Label name="selected-company-price" text="FC 0.00" class="company-price" />
+                                    <ui:Label name="selected-company-change" text="0.00%" class="price-change" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement name="price-chart-host" class="price-chart-host" />
+                            <ui:VisualElement class="chart-footer">
+                                <ui:Label text="Older" />
+                                <ui:Label text="Updates every market tick" />
+                                <ui:Label text="Now" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+
+                        <ui:VisualElement class="card trade-card">
+                            <ui:VisualElement class="trade-title-row">
+                                <ui:VisualElement>
+                                    <ui:Label text="Place a trade" class="section-title" />
+                                    <ui:Label text="Orders execute immediately at the displayed fictional price." class="small-muted" />
+                                </ui:VisualElement>
+                                <ui:VisualElement class="position-summary">
+                                    <ui:Label text="YOU OWN" class="eyebrow" />
+                                    <ui:Label name="owned-shares" text="0" class="position-number" />
+                                    <ui:Label name="position-value" text="FC 0.00" class="small-muted" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                            <ui:VisualElement class="trade-controls">
+                                <ui:TextField name="trade-quantity" label="Shares" value="1" class="quantity-field" />
+                                <ui:Label name="trade-estimate" text="Estimated order value" class="trade-estimate" />
+                                <ui:Button name="buy-button" text="Buy shares" class="primary-button" />
+                                <ui:Button name="sell-button" text="Sell shares" class="secondary-button" />
+                            </ui:VisualElement>
+                            <ui:Label name="trade-feedback" text="" class="trade-feedback" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="portfolio-page" class="page" style="display: none;">
+                <ui:VisualElement class="page-heading">
+                    <ui:VisualElement>
+                        <ui:Label text="Portfolio" class="page-title" />
+                        <ui:Label text="See what you own and how your fictional investments are performing." class="page-subtitle" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="stat-grid">
+                    <ui:VisualElement class="card stat-card stat-card--primary">
+                        <ui:Label text="TOTAL VALUE" class="eyebrow" />
+                        <ui:Label name="portfolio-total-value" text="FC 0.00" class="stat-value" />
+                        <ui:Label text="Cash plus current holdings" class="small-muted" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="card stat-card stat-card--cash">
+                        <ui:Label text="CASH" class="eyebrow" />
+                        <ui:Label name="portfolio-cash" text="FC 0.00" class="stat-value" />
+                        <ui:Label text="Available to trade" class="small-muted" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="card stat-card stat-card--holdings">
+                        <ui:Label text="HOLDINGS" class="eyebrow" />
+                        <ui:Label name="portfolio-holdings-value" text="FC 0.00" class="stat-value" />
+                        <ui:Label text="Value at current prices" class="small-muted" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="card stat-card stat-card--profit">
+                        <ui:Label text="TOTAL PROFIT / LOSS" class="eyebrow" />
+                        <ui:Label name="portfolio-total-profit" text="FC 0.00" class="stat-value" />
+                        <ui:Label text="Realized plus unrealized" class="small-muted" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="portfolio-content-row">
+                    <ui:VisualElement class="card holdings-card">
+                        <ui:Label text="Your holdings" class="section-title" />
+                        <ui:VisualElement class="table-header">
+                            <ui:Label text="Company" class="table-cell table-cell--company" />
+                            <ui:Label text="Shares" class="table-cell" />
+                            <ui:Label text="Avg. buy" class="table-cell" />
+                            <ui:Label text="Price" class="table-cell" />
+                            <ui:Label text="Value" class="table-cell" />
+                            <ui:Label text="Profit / loss" class="table-cell" />
+                        </ui:VisualElement>
+                        <ui:Label name="holdings-empty" text="No holdings yet. Visit Market and buy your first share." class="empty-state" />
+                        <ui:VisualElement name="holdings-list" class="holdings-list" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="portfolio-bottom-row">
+                    <ui:VisualElement class="card performance-card">
+                        <ui:Label text="Performance breakdown" class="section-title" />
+                        <ui:VisualElement class="performance-line">
+                            <ui:Label text="Unrealized profit / loss" />
+                            <ui:Label name="portfolio-unrealized-profit" text="FC 0.00" class="performance-value" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="performance-line">
+                            <ui:Label text="Realized profit / loss" />
+                            <ui:Label name="portfolio-realized-profit" text="FC 0.00" class="performance-value" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="locked-preview">
+                            <ui:Label text="Dividend income" />
+                            <ui:Label text="Unlocks in an early-game milestone" class="small-muted" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="card recent-card">
+                        <ui:Label text="Recent transactions" class="section-title" />
+                        <ui:Label name="transactions-empty" text="Completed buys and sells will appear here." class="empty-state" />
+                        <ui:VisualElement name="transaction-list" class="transaction-list" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement name="upgrades-page" class="page" style="display: none;">
+                <ui:VisualElement class="page-heading">
+                    <ui:VisualElement>
+                        <ui:Label text="Upgrades" class="page-title" />
+                        <ui:Label text="Spend fictional credits to make your market desk more capable over time." class="page-subtitle" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="upgrade-summary">
+                        <ui:VisualElement class="upgrade-summary-item upgrade-summary-item--levels">
+                            <ui:Label text="LEVELS OWNED" class="eyebrow" />
+                            <ui:Label name="upgrade-total-levels" text="0" class="upgrade-summary-value" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="upgrade-summary-item upgrade-summary-item--spent">
+                            <ui:Label text="TOTAL SPENT" class="eyebrow" />
+                            <ui:Label name="upgrade-total-spent" text="FC 0.00" class="upgrade-summary-value" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label name="upgrade-feedback" text="" class="upgrade-feedback" />
+                <ui:ScrollView class="upgrade-scroll" mode="Vertical">
+                    <ui:VisualElement name="upgrade-grid" class="upgrade-grid" />
+                    <ui:VisualElement class="automation-note">
+                        <ui:Label text="AUTOMATION COMES LATER" class="eyebrow" />
+                        <ui:Label text="Automation capacity can be prepared here, but automatic trading rules unlock in a later milestone." class="small-muted" />
+                    </ui:VisualElement>
+                </ui:ScrollView>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
